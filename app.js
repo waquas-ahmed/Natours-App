@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // body parser reading data from the body into req.body
 app.use(express.json({ limit: '10kb' })); //middleware
-app.use(cookieParser(0))
+app.use(cookieParser())
 
 // Data Sanitization against NoSQL query injection
 // app.use(mongoSanitize());
