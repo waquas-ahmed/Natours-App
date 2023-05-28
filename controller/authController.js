@@ -39,7 +39,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 exports.login = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
-
+    console.log('req.body', req.body);
     // check if email and password exist!!
     if (!email || !password) return next(new AppError('Please provide email or password!!', 400));
 
@@ -95,6 +95,7 @@ exports.protect = catchAsync(async function (req, res, next) {
 
     // GRANT ACCESS TO PROTECTED ROUTE
     req.user = currentUser;
+    res.locals.user = currentUser;
     next();
 });
 
