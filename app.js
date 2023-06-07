@@ -15,6 +15,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
 const reviewRouter = require('./routes/reviewRoutes');
 const viewsRoute = require('./routes/viewsRoute');
+const bookingRouter = require('./routes/bookingRoutes');
 
 const app = express();
 // console.log('41');
@@ -73,6 +74,7 @@ app.use('/', viewsRoute);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/bookings', bookingRouter);
 
 // agar koi route match nhi karega to ye piece of code execute hoga
 app.all('*', (req, res, next) => {

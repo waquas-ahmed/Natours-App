@@ -1,3 +1,4 @@
+const Booking = require('../models/bookingModel')
 const AppError = require('../utils/appError');
 const Tour = require('./../models/tourModel');
 const User = require('./../models/userModel');
@@ -48,6 +49,21 @@ exports.getAccount = (req, res) => {
         title: 'Your Account'
     });
 }
+
+exports.getMyTours = catchAsync(async (req, res, next) => {
+
+    // 1) Find all bookings
+    const bookings = await Booking.find({user: req.user.id});
+
+    // 2) Find  tours with the returned IDs.
+    const tourIDs = bookings.map(el => el.tour);
+    const tours = await Tour.find({_id: {$in : tourIDs}});
+
+    res.status(200).render('overview', {
+        title: 'My Tour',
+        tours
+    });
+});
 
 // this is for the submitting through the form and action is working
 // exports.updateUserData = catchAsync(async (req, res, next) => {
