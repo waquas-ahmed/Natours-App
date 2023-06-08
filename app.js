@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -59,6 +60,9 @@ app.use(cookieParser())
 
 // Prevent parameter pollution
 // app.use(hpp({ whitelist: ['duration', 'ratingsQuantity', 'ratingsAverage', 'maxGroupSize', 'difficulty', 'price'] }));
+
+// implementing compression
+app.use(compression());
 
 // Test middleware
 app.use((req, res, next) => {

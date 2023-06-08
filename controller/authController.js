@@ -34,7 +34,7 @@ const createSendToken = (user, statusCode, res) => {
 
 exports.signup = catchAsync(async (req, res, next) => {
     const newUser = await User.create(req.body);
-    const url = 'http://127.0.0.1:3000/me';
+    const url = '/me';
     await new Email(newUser, url).sendWelcome();
     createSendToken(newUser, 201, res);
 });
